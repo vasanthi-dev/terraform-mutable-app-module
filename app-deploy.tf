@@ -1,4 +1,7 @@
 resource "null_resource" "app-deploy" {
+  triggers = {
+    instance_ids = aws_spot_instance_request.ec2-spot.*.spot_instance_id
+  }
   count       = length(aws_spot_instance_request.ec2-spot)
   provisioner "remote-exec" {
     connection {
