@@ -13,17 +13,17 @@ resource "aws_lb_target_group_attachment" "tg-attach" {
 }
 
 //LISTNER DIRECTLY
-resource "aws_lb_listener" "lb-listener" {
-  count             = var.LB_PUBLIC ? 1:0
-  load_balancer_arn = data.terraform_remote_state.alb.outputs.ALB_PUBLIC_ARN
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.tg.arn
-  }
-}
+#resource "aws_lb_listener" "lb-listener" {
+#  count             = var.LB_PUBLIC ? 1:0
+#  load_balancer_arn = data.terraform_remote_state.alb.outputs.ALB_PUBLIC_ARN
+#  port              = "80"
+#  protocol          = "HTTP"
+#
+#  default_action {
+#    type             = "forward"
+#    target_group_arn = aws_lb_target_group.tg.arn
+#  }
+#}
 // LISTNER RULE
 resource "aws_lb_listener_rule" "static" {
   count             = var.LB_PRIVATE ? 1:0
