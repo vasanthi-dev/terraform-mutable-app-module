@@ -1,6 +1,7 @@
 resource "null_resource" "app-deploy" {
   triggers = {
     instance_ids = join(",", aws_spot_instance_request.ec2-spot.*.spot_instance_id)
+    app_version = var.APP_VERSION
   }
   count       = length(aws_spot_instance_request.ec2-spot)
   provisioner "remote-exec" {
