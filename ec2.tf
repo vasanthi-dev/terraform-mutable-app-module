@@ -17,14 +17,14 @@ resource "aws_ec2_tag" "spot-instances" {
   key         = "Name"
   value       = "${var.COMPONENT}-${var.ENV}-${count.index+1}"
 }
-resource "aws_ec2_tag" "spot-instances" {
+resource "aws_ec2_tag" "spot-instances-env" {
   count = length(aws_spot_instance_request.ec2-spot)
   resource_id = aws_spot_instance_request.ec2-spot.*.spot_instance_id[count.index]
   key         = "ENV"
   value       = var.ENV
 }
 
-resource "aws_ec2_tag" "spot-instances" {
+resource "aws_ec2_tag" "spot-instances-monitor" {
   count = length(aws_spot_instance_request.ec2-spot)
   resource_id = aws_spot_instance_request.ec2-spot.*.spot_instance_id[count.index]
   key         = "Monitor"
